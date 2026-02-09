@@ -24,7 +24,7 @@ export function initPayment(sequelize: Sequelize): void {
     {
       paymentId: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
       organizationId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'organizations', key: 'organization_id' } },
-      paymentNumber: { type: DataTypes.STRING(50), allowNull: false, unique: true },
+      paymentNumber: { type: DataTypes.STRING(50), allowNull: false },
       invoiceId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'invoices', key: 'invoice_id' } },
       entityType: { type: DataTypes.STRING(50), allowNull: false },
       entityId: { type: DataTypes.INTEGER, allowNull: false },
@@ -44,6 +44,7 @@ export function initPayment(sequelize: Sequelize): void {
       modelName: 'Payment',
       tableName: 'payments',
       indexes: [
+        { unique: true, fields: ['organization_id', 'payment_number'] },
         { fields: ['organization_id'] },
         { fields: ['invoice_id'] },
         { fields: ['entity_type', 'entity_id'] },

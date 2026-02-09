@@ -26,7 +26,7 @@ export function initSalesReturn(sequelize: Sequelize): void {
     {
       returnId: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
       organizationId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'organizations', key: 'organization_id' } },
-      returnNumber: { type: DataTypes.STRING(50), allowNull: false, unique: true },
+      returnNumber: { type: DataTypes.STRING(50), allowNull: false },
       orderId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'sales_orders', key: 'order_id' } },
       customerId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'customers', key: 'customer_id' } },
       warehouseId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'warehouses', key: 'warehouse_id' } },
@@ -49,6 +49,7 @@ export function initSalesReturn(sequelize: Sequelize): void {
       modelName: 'SalesReturn',
       tableName: 'sales_returns',
       indexes: [
+        { unique: true, fields: ['organization_id', 'return_number'] },
         { fields: ['organization_id'] },
         { fields: ['order_id'] },
         { fields: ['customer_id'] },

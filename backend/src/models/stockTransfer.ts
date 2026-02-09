@@ -34,7 +34,7 @@ export function initStockTransfer(sequelize: Sequelize): void {
         allowNull: false,
         references: { model: 'organizations', key: 'organization_id' },
       },
-      transferNumber: { type: DataTypes.STRING(50), allowNull: false, unique: true },
+      transferNumber: { type: DataTypes.STRING(50), allowNull: false },
       fromWarehouseId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -61,6 +61,7 @@ export function initStockTransfer(sequelize: Sequelize): void {
       modelName: 'StockTransfer',
       tableName: 'stock_transfers',
       indexes: [
+        { unique: true, fields: ['organization_id', 'transfer_number'] },
         { fields: ['organization_id'] },
         { fields: ['from_warehouse_id'] },
         { fields: ['to_warehouse_id'] },

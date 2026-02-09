@@ -25,7 +25,7 @@ export function initShipment(sequelize: Sequelize): void {
     {
       shipmentId: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
       organizationId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'organizations', key: 'organization_id' } },
-      shipmentNumber: { type: DataTypes.STRING(50), allowNull: false, unique: true },
+      shipmentNumber: { type: DataTypes.STRING(50), allowNull: false },
       orderId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'sales_orders', key: 'order_id' } },
       carrierId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'shipping_carriers', key: 'carrier_id' } },
       trackingNumber: { type: DataTypes.STRING(100), allowNull: true },
@@ -47,6 +47,7 @@ export function initShipment(sequelize: Sequelize): void {
       modelName: 'Shipment',
       tableName: 'shipments',
       indexes: [
+        { unique: true, fields: ['organization_id', 'shipment_number'] },
         { fields: ['organization_id'] },
         { fields: ['order_id'] },
         { fields: ['carrier_id'] },

@@ -21,7 +21,7 @@ export function initGoodsReceiptNote(sequelize: Sequelize): void {
     {
       grnId: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
       organizationId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'organizations', key: 'organization_id' } },
-      grnNumber: { type: DataTypes.STRING(50), allowNull: false, unique: true },
+      grnNumber: { type: DataTypes.STRING(50), allowNull: false },
       poId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'purchase_orders', key: 'po_id' } },
       warehouseId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'warehouses', key: 'warehouse_id' } },
       receiptDate: { type: DataTypes.DATEONLY, allowNull: false },
@@ -35,6 +35,7 @@ export function initGoodsReceiptNote(sequelize: Sequelize): void {
       modelName: 'GoodsReceiptNote',
       tableName: 'goods_receipt_notes',
       indexes: [
+        { unique: true, fields: ['organization_id', 'grn_number'] },
         { fields: ['organization_id'] },
         { fields: ['po_id'] },
         { fields: ['warehouse_id'] },

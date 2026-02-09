@@ -24,7 +24,7 @@ export function initSerialNumber(sequelize: Sequelize): void {
         primaryKey: true,
       },
       productId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'products', key: 'product_id' } },
-      serialNumber: { type: DataTypes.STRING(100), allowNull: false, unique: true },
+      serialNumber: { type: DataTypes.STRING(100), allowNull: false },
       batchId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'batches', key: 'batch_id' } },
       warehouseId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'warehouses', key: 'warehouse_id' } },
       status: { type: DataTypes.STRING(50), allowNull: false, defaultValue: 'in_stock' },
@@ -37,6 +37,7 @@ export function initSerialNumber(sequelize: Sequelize): void {
       modelName: 'SerialNumber',
       tableName: 'serial_numbers',
       indexes: [
+        { unique: true, fields: ['product_id', 'serial_number'] },
         { fields: ['product_id'] },
         { fields: ['batch_id'] },
         { fields: ['warehouse_id'] },

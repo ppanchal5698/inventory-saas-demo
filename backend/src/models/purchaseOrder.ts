@@ -38,7 +38,7 @@ export function initPurchaseOrder(sequelize: Sequelize): void {
     {
       poId: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
       organizationId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'organizations', key: 'organization_id' } },
-      poNumber: { type: DataTypes.STRING(50), allowNull: false, unique: true },
+      poNumber: { type: DataTypes.STRING(50), allowNull: false },
       supplierId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'suppliers', key: 'supplier_id' } },
       warehouseId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'warehouses', key: 'warehouse_id' } },
       orderDate: { type: DataTypes.DATEONLY, allowNull: false },
@@ -78,6 +78,7 @@ export function initPurchaseOrder(sequelize: Sequelize): void {
       tableName: 'purchase_orders',
       paranoid: true,
       indexes: [
+        { unique: true, fields: ['organization_id', 'po_number'] },
         { fields: ['organization_id'] },
         { fields: ['supplier_id'] },
         { fields: ['warehouse_id'] },

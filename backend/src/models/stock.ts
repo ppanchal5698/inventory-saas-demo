@@ -20,6 +20,7 @@ export class Stock extends Model {
   declare lastStockCheck: Date | null;
   declare lastStockCheckBy: number | null;
   declare averageCost: string | null;
+  declare quantityAvailable: number; // Generated column
   declare createdAt: Date;
   declare updatedAt: Date;
 }

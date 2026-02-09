@@ -32,7 +32,7 @@ export function initBatch(sequelize: Sequelize): void {
         allowNull: false,
         references: { model: 'warehouses', key: 'warehouse_id' },
       },
-      batchNumber: { type: DataTypes.STRING(100), allowNull: false, unique: true },
+      batchNumber: { type: DataTypes.STRING(100), allowNull: false },
       manufacturingDate: { type: DataTypes.DATEONLY, allowNull: true },
       expiryDate: { type: DataTypes.DATEONLY, allowNull: true },
       quantity: { type: DataTypes.INTEGER, allowNull: false },
@@ -47,6 +47,7 @@ export function initBatch(sequelize: Sequelize): void {
       modelName: 'Batch',
       tableName: 'batches',
       indexes: [
+        { unique: true, fields: ['product_id', 'batch_number'] },
         { fields: ['product_id'] },
         { fields: ['warehouse_id'] },
         { fields: ['expiry_date'] },
