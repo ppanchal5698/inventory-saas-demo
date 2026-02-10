@@ -19,6 +19,7 @@ export class Invoice extends Model {
   declare discount: string;
   declare totalAmount: string;
   declare paidAmount: string;
+  declare balanceDue: string; // Generated column
   declare currency: string;
   declare billingAddress: string | null;
   declare shippingAddress: string | null;
@@ -39,7 +40,7 @@ export function initInvoice(sequelize: Sequelize): void {
     {
       invoiceId: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
       organizationId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'organizations', key: 'organization_id' } },
-      invoiceNumber: { type: DataTypes.STRING(50), allowNull: false, unique: true },
+      invoiceNumber: { type: DataTypes.STRING(50), allowNull: false },
       invoiceType: {
         type: DataTypes.ENUM('sales', 'purchase', 'credit_note', 'debit_note', 'proforma'),
         allowNull: false,
@@ -78,6 +79,7 @@ export function initInvoice(sequelize: Sequelize): void {
       tableName: 'invoices',
       paranoid: true,
       indexes: [
+        { unique: true, fields: ['organization_id', 'invoice_number'] },
         { fields: ['organization_id'] },
         { fields: ['invoice_type'] },
         { fields: ['entity_type', 'entity_id'] },

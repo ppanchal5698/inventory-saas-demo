@@ -25,7 +25,7 @@ export function initPurchaseReturn(sequelize: Sequelize): void {
     {
       returnId: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
       organizationId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'organizations', key: 'organization_id' } },
-      returnNumber: { type: DataTypes.STRING(50), allowNull: false, unique: true },
+      returnNumber: { type: DataTypes.STRING(50), allowNull: false },
       poId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'purchase_orders', key: 'po_id' } },
       supplierId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'suppliers', key: 'supplier_id' } },
       warehouseId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'warehouses', key: 'warehouse_id' } },
@@ -47,6 +47,7 @@ export function initPurchaseReturn(sequelize: Sequelize): void {
       modelName: 'PurchaseReturn',
       tableName: 'purchase_returns',
       indexes: [
+        { unique: true, fields: ['organization_id', 'return_number'] },
         { fields: ['organization_id'] },
         { fields: ['po_id'] },
         { fields: ['supplier_id'] },

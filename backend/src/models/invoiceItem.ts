@@ -12,6 +12,7 @@ export class InvoiceItem extends Model {
   declare taxRateId: number | null;
   declare taxAmount: string;
   declare discount: string;
+  declare lineTotal: string; // Generated column
 }
 
 export function initInvoiceItem(sequelize: Sequelize): void {

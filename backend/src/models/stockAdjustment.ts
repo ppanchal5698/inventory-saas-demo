@@ -14,6 +14,7 @@ export class StockAdjustment extends Model {
   declare batchId: number | null;
   declare oldQuantity: number;
   declare newQuantity: number;
+  declare quantityDifference: number; // Generated column
   declare reason: 'count_discrepancy' | 'damage' | 'theft' | 'expiry' | 'correction' | 'other';
   declare unitCost: string | null;
   declare notes: string | null;
@@ -38,7 +39,7 @@ export function initStockAdjustment(sequelize: Sequelize): void {
         allowNull: false,
         references: { model: 'organizations', key: 'organization_id' },
       },
-      adjustmentNumber: { type: DataTypes.STRING(50), allowNull: false, unique: true },
+      adjustmentNumber: { type: DataTypes.STRING(50), allowNull: false },
       productId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'products', key: 'product_id' } },
       warehouseId: {
         type: DataTypes.INTEGER,
@@ -64,6 +65,7 @@ export function initStockAdjustment(sequelize: Sequelize): void {
       modelName: 'StockAdjustment',
       tableName: 'stock_adjustments',
       indexes: [
+        { unique: true, fields: ['organization_id', 'adjustment_number'] },
         { fields: ['organization_id'] },
         { fields: ['product_id'] },
         { fields: ['warehouse_id'] },

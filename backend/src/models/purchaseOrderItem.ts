@@ -12,6 +12,7 @@ export class PurchaseOrderItem extends Model {
   declare taxAmount: string;
   declare discount: string;
   declare receivedQuantity: number;
+  declare lineTotal: string; // Generated column
   declare notes: string | null;
 }
 

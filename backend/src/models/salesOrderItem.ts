@@ -14,6 +14,7 @@ export class SalesOrderItem extends Model {
   declare taxAmount: string;
   declare discount: string;
   declare fulfilledQuantity: number;
+  declare lineTotal: string; // Generated column
   declare notes: string | null;
 }
 

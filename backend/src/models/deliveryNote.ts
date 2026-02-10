@@ -21,7 +21,7 @@ export function initDeliveryNote(sequelize: Sequelize): void {
     {
       deliveryNoteId: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
       organizationId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'organizations', key: 'organization_id' } },
-      deliveryNoteNumber: { type: DataTypes.STRING(50), allowNull: false, unique: true },
+      deliveryNoteNumber: { type: DataTypes.STRING(50), allowNull: false },
       orderId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'sales_orders', key: 'order_id' } },
       shipmentId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'shipments', key: 'shipment_id' } },
       deliveryDate: { type: DataTypes.DATEONLY, allowNull: false },
@@ -35,6 +35,7 @@ export function initDeliveryNote(sequelize: Sequelize): void {
       modelName: 'DeliveryNote',
       tableName: 'delivery_notes',
       indexes: [
+        { unique: true, fields: ['organization_id', 'delivery_note_number'] },
         { fields: ['organization_id'] },
         { fields: ['order_id'] },
         { fields: ['shipment_id'] },

@@ -40,7 +40,7 @@ export function initSalesOrder(sequelize: Sequelize): void {
     {
       orderId: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
       organizationId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'organizations', key: 'organization_id' } },
-      orderNumber: { type: DataTypes.STRING(50), allowNull: false, unique: true },
+      orderNumber: { type: DataTypes.STRING(50), allowNull: false },
       customerId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'customers', key: 'customer_id' } },
       warehouseId: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'warehouses', key: 'warehouse_id' } },
       orderDate: { type: DataTypes.DATEONLY, allowNull: false },
@@ -82,6 +82,7 @@ export function initSalesOrder(sequelize: Sequelize): void {
       tableName: 'sales_orders',
       paranoid: true,
       indexes: [
+        { unique: true, fields: ['organization_id', 'order_number'] },
         { fields: ['organization_id'] },
         { fields: ['customer_id'] },
         { fields: ['warehouse_id'] },
