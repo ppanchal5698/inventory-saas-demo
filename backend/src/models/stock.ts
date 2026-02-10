@@ -53,6 +53,7 @@ export function initStock(sequelize: Sequelize): void {
       lastStockCheck: { type: DataTypes.DATE, allowNull: true },
       lastStockCheckBy: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'users', key: 'user_id' } },
       averageCost: { type: DataTypes.DECIMAL(15, 2), allowNull: true },
+      quantityAvailable: { type: DataTypes.INTEGER, allowNull: true }, // Generated Column
     },
     {
       sequelize,

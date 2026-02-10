@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-import databaseConfig from '../config/database.js';
+import databaseConfig from '../config/database';
 import {
   initCountry,
   initState,
@@ -109,19 +109,9 @@ import {
   initApiKey,
   initWebhook,
   initWebhookLog,
-} from '../models/index.js';
+} from '../models/index';
 
-const sequelize = new Sequelize({
-  host: databaseConfig.host,
-  port: databaseConfig.port,
-  username: databaseConfig.username,
-  password: databaseConfig.password,
-  database: databaseConfig.database,
-  dialect: databaseConfig.dialect,
-  logging: databaseConfig.logging,
-  pool: databaseConfig.pool,
-  define: databaseConfig.define,
-});
+const sequelize = new Sequelize(databaseConfig);
 
 // Init models in dependency order (FK order)
 initCountry(sequelize);

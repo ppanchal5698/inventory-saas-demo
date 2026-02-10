@@ -61,6 +61,7 @@ export function initInvoice(sequelize: Sequelize): void {
       discount: { type: DataTypes.DECIMAL(15, 2), allowNull: true, defaultValue: 0 },
       totalAmount: { type: DataTypes.DECIMAL(15, 2), allowNull: false },
       paidAmount: { type: DataTypes.DECIMAL(15, 2), allowNull: true, defaultValue: 0 },
+      balanceDue: { type: DataTypes.DECIMAL(15, 2), allowNull: true }, // Generated Column
       currency: { type: DataTypes.STRING(10), allowNull: true, defaultValue: 'USD' },
       billingAddress: { type: DataTypes.TEXT, allowNull: true },
       shippingAddress: { type: DataTypes.TEXT, allowNull: true },

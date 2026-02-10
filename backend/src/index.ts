@@ -1,22 +1,10 @@
-import 'dotenv/config';
-import express, { Request, Response } from 'express';
-import { sequelize } from './db/index.js';
+import { sequelize } from './db/index';
+import { createApp } from './app';
 
-const app = express();
 const PORT = parseInt(process.env.PORT ?? '3000', 10);
 
-app.use(express.json());
-
-app.get('/health', async (_req: Request, res: Response): Promise<void> => {
-  try {
-    await sequelize.authenticate();
-    res.status(200).json({ status: 'ok', database: 'connected' });
-  } catch (err) {
-    res.status(503).json({ status: 'error', database: 'disconnected' });
-  }
-});
-
 async function start(): Promise<void> {
+  const app = createApp();
   try {
     await sequelize.authenticate();
     console.log('Database connection established.');

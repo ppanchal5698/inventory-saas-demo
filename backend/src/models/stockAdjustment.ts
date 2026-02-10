@@ -49,6 +49,7 @@ export function initStockAdjustment(sequelize: Sequelize): void {
       batchId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'batches', key: 'batch_id' } },
       oldQuantity: { type: DataTypes.INTEGER, allowNull: false },
       newQuantity: { type: DataTypes.INTEGER, allowNull: false },
+      quantityDifference: { type: DataTypes.INTEGER, allowNull: true }, // Generated Column
       reason: {
         type: DataTypes.ENUM('count_discrepancy', 'damage', 'theft', 'expiry', 'correction', 'other'),
         allowNull: false,

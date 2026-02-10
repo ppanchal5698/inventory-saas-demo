@@ -32,6 +32,7 @@ export function initSalesOrderItem(sequelize: Sequelize): void {
       taxAmount: { type: DataTypes.DECIMAL(15, 2), allowNull: true, defaultValue: 0 },
       discount: { type: DataTypes.DECIMAL(15, 2), allowNull: true, defaultValue: 0 },
       fulfilledQuantity: { type: DataTypes.INTEGER, allowNull: true, defaultValue: 0 },
+      lineTotal: { type: DataTypes.DECIMAL(15, 2), allowNull: true }, // Generated Column
       notes: { type: DataTypes.TEXT, allowNull: true },
     },
     {

@@ -7,7 +7,7 @@
  * Ensure .env is set (DB_*) and the database exists (e.g. inventory_management).
  */
 import 'dotenv/config';
-import { sequelize } from '../db/index.js';
+import { sequelize } from '../db/index';
 
 const POST_SYNC_SQL = [
   `ALTER TABLE \`stock\` ADD COLUMN \`quantity_available\` INT GENERATED ALWAYS AS (\`quantity_on_hand\` - \`quantity_reserved\`) STORED`,
