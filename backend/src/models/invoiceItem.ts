@@ -27,6 +27,7 @@ export function initInvoiceItem(sequelize: Sequelize): void {
       taxRateId: { type: DataTypes.INTEGER, allowNull: true, references: { model: 'tax_rates', key: 'tax_rate_id' } },
       taxAmount: { type: DataTypes.DECIMAL(15, 2), allowNull: true, defaultValue: 0 },
       discount: { type: DataTypes.DECIMAL(15, 2), allowNull: true, defaultValue: 0 },
+      lineTotal: { type: DataTypes.DECIMAL(15, 2), allowNull: true }, // Generated Column
     },
     {
       sequelize,
